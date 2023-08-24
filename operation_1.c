@@ -2,7 +2,7 @@
 
 int is_digit(char *argument)
 {
-	if (*argument == '-')
+	if (*argument == '-' || *argument == '+')
 		argument++;
 	while (*argument)
 	{
