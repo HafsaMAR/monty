@@ -28,14 +28,14 @@ void add(stack_t **stack, unsigned int line_number)
 	stack_t *temp;
 	int sum;
 
-	if (*stack == NULL || !(*stack)->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	sum = (*stack)->n + (*stack)->next->n;
 	temp = *stack;
-	stack = (*stack)->next;
+	*stack = (*stack)->next;
 	(*stack)->n = sum;
 	free(temp);
 }
@@ -57,9 +57,33 @@ void sub(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	diff = (*stack)->next->n - (*stack)->n;
+	difference = (*stack)->next->n - (*stack)->n;
 	temp = *stack;
 	*stack = (*stack)->next;
-	(*stack)->n = diff;
+	(*stack)->n = difference;
+	free(temp);
+}
+
+void division(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+	int quot;
+
+	if (!*stack || !(*stack)->next)
+	{
+		fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	quot = (*stack)->next->n / (*stack)->n;
+	temp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->n = quot;
 	free(temp);
 }
