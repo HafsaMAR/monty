@@ -58,7 +58,7 @@ void tokenize_exec(FILE *input_file, info_t info)
 		comment_pos = strstr(info.line, " #");
 		if (comment_pos != NULL)
 		{
-			*comment_pos = '\0';
+			*comment_pos = '\n';
 		}
 		opcode = strtok(info.line, " \t\n");
 		if (!opcode || opcode[0] == '#')
