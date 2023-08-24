@@ -24,12 +24,15 @@ FILE *file_check(char **av)
 	return (input_file);
 }
 
-/*{"push", &push}, {"pall", &pall}, {"pop", &pop},  {"swap", &swap}, {"nop", &nop}, {"add", &add}, {"sub", sub}, {"div", &division}, {"mul", &mul}, {"rotl", &rotl}, {"rotr", &rotr}, {"stack", &stack}, {"queue", &queue}, {"pstr", &pstr}, {"pchar", &pchar}, {"mod", &mod}, {NULL, NULL}};*/
+/*{"push", &push}, {"pall", &pall}, ,  {"swap", &swap}, {"nop", &nop}, {"add", &add}, {"sub", sub}, {"div", &division}, {"mul", &mul}, {"rotl", &rotl}, {"rotr", &rotr}, {"stack", &stack}, {"queue", &queue}, {"pstr", &pstr}, {"pchar", &pchar}, {"mod", &mod}, {NULL, NULL}};*/
 void (*get_operation(char *operation_code))(stack_t **stack, unsigned int line_number)
 {
 	int i;
 	instruction_t operations[] = {
-		{"push", &push}, {"pall", &pall}, {"pint", &pint}, {"stack", &stack}, {"queue", &queue}, {NULL, NULL}};
+		{"push", &push}, {"pall", &pall},
+		{"pint", &pint},{"pop", &pop},
+		{"stack", &stack}, {"queue", &queue},
+		{NULL, NULL}};
 	for (i = 0; operations[i].opcode != NULL; i++)
 	{
 		if (strcmp(operation_code, operations[i].opcode) == 0)

@@ -32,16 +32,16 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	n = atoi(argument);
 	if (info.mode == MODE_QUEUE)
-	add_node_end(stack, n);
+		add_node_end(stack, n);
 	else
-	add_node(stack, n);
+		add_node(stack, n);
 }
 
 /**
  * pall - prints all the elements of the list
  * @stack: pointer to header of stack structure
  * @line_number: number line of the operation
-*/
+ */
 
 void pall(stack_t **stack, unsigned int line_number)
 {
@@ -66,4 +66,24 @@ void pint(stack_t **stack, unsigned int line_number)
 	printf("%d\n", (*stack)->n);
 }
 
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
 
+	if ((*stack) == NULL)
+	{
+		printf("L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	if ((*stack)->next == NULL)
+	{
+		free((*stack));
+		(*stack) = NULL;
+	}
+	else
+	{
+		(*stack) = (*stack)->next;
+		(*stack)->prev = NULL;
+		free(temp);
+	}
+}
