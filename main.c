@@ -18,7 +18,6 @@ FILE *file_check(char **av)
 	if (!input_file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
-		fclose(input_file);
 		exit(EXIT_FAILURE);
 	}
 	return (input_file);
@@ -52,7 +51,7 @@ void tokenize_exec(FILE *input_file, info_t info)
 
 	/* intialization of the structure*/
 
-	while ((info.nread = getline(&info.line, &info.lenght, input_file)) != 1)
+	while (fgets(info.line, sizeof(info.line), input_file))
 	{
 		info.line_num++;
 		comment_pos = strstr(info.line, " #");
@@ -60,16 +59,12 @@ void tokenize_exec(FILE *input_file, info_t info)
 		{
 			*comment_pos = '\n';
 		}
-		opcode = strtok(info.line, " \n\t");
+		opcode = strtok(info.line, " \t\n");
 		if (!opcode || opcode[0] == '#')
 			return;
-
 		function = get_operation(opcode);
 		if (function != NULL)
-		{
-			printf("%s", opcode);
 			function(&info.stack, info.line_num);
-		}
 		else
 			invalid_function(info.line_num, opcode);
 	}
@@ -89,8 +84,7 @@ int main(int ac, char **av)
 
 	num_arg_check(ac);
 	input_file = file_check(av);
-	if (input_file)
-		tokenize_exec(input_file, info);
+	tokenize_exec(input_file, info);
 
 	/* open the file and check it readability*/
 

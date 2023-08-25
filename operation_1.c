@@ -23,11 +23,9 @@ int is_digit(char *argument)
 void push(stack_t **stack, unsigned int line_number)
 {
 	int n;
-	char *argument = strtok(NULL, " \t\n");
+	char *argument;
 
-	if (argument == NULL)
-		printf("It is NULL %s\n", argument);
-
+	argument = strtok(NULL, " \t\n");
 	if (argument == NULL || !is_digit(argument))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
@@ -79,6 +77,6 @@ void pop(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	temp = *stack;
-	(*stack) = (*stack)->next;
-	free(temp);
+(*stack) = (*stack)->next;
+		free(temp);
 }

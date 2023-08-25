@@ -1,7 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-#define _GNU_SOURCE
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -47,10 +46,8 @@ typedef enum
 
 typedef struct info_s
 {
-        char *line;
+        char line[1024];
         unsigned int line_num;
-        ssize_t nread;
-        size_t  lenght;
         stack_t *stack;
         mode_format mode; 
 
