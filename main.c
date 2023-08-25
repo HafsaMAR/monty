@@ -44,30 +44,23 @@ void invalid_function(int line_num, char *opcode)
 			line_num, opcode);
 	exit(EXIT_FAILURE);
 }
-void tokenize_exec(FILE *input_file, info_t info)
+
+void tokenize_exec(info_t *info)
 {
-	char *opcode, *comment_pos;
+	char *opcode;
 	void (*function)(stack_t **stack, unsigned int line_number);
 
 	/* intialization of the structure*/
-
-	while (fgets(info.line, sizeof(info.line), input_file))
+	opcode = strtok(info->line, " \t\n");
+	if (!opcode || opcode[0] == '#')
+		return;
+	function = get_operation(opcode);
+	if (function != NULL)
 	{
-		info.line_num++;
-		comment_pos = strstr(info.line, " #");
-		if (comment_pos != NULL)
-		{
-			*comment_pos = '\n';
-		}
-		opcode = strtok(info.line, " \t\n");
-		if (!opcode || opcode[0] == '#')
-			return;
-		function = get_operation(opcode);
-		if (function != NULL)
-			function(&info.stack, info.line_num);
-		else
-			invalid_function(info.line_num, opcode);
+		function(&info->stack, info->line_num);
 	}
+	else
+		invalid_function(info->line_num, opcode);
 }
 
 /**
@@ -84,7 +77,11 @@ int main(int ac, char **av)
 
 	num_arg_check(ac);
 	input_file = file_check(av);
-	tokenize_exec(input_file, info);
+	while (fgets(info.line, sizeof(info.line), input_file))
+	{
+		info.line_num++;
+		tokenize_exec(&info);
+	}
 
 	/* open the file and check it readability*/
 
@@ -92,6 +89,5 @@ int main(int ac, char **av)
 
 	fclose(input_file);
 	free_list(info.stack);
-	free_info(info);
 	return (0);
 }
