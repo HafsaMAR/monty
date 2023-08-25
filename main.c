@@ -91,6 +91,7 @@ int main(int ac, char **av)
 	/* tokenize each line and execute the function*/
 
 	fclose(input_file);
-	free_list(&info.stack);
+	free_list(info.stack);
+	free_info(info);
 	return (0);
 }

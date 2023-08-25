@@ -64,15 +64,23 @@ stack_t *add_node_end(stack_t **h, int n)
  * free_list - free the doubly linked list stack
  * @h: pointer to head of the stack
 */
-void free_list(stack_t ** h)
+void free_list(stack_t *h)
 {
 	stack_t *node;
 
-	while (*h != NULL)
+	while (h != NULL)
 	{
-		node = *h;
-		*h = (*h)->next;
+		node = h;
+		h = h->next;
 		free(node);
 	}
 	
+}
+
+void free_info(info_t info)
+{
+	if (info.stack)
+	{
+		free_list(info.stack);
+	}
 }

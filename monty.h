@@ -72,8 +72,9 @@ void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
 void stack(stack_t **stack, unsigned int line_number);
 void queue(stack_t **stack, unsigned int line_number);
-void free_list(stack_t ** h);
+void free_list(stack_t *h);
 stack_t *add_node_end(stack_t **h, int n);
 stack_t *add_node(stack_t **h, int n);
+void free_info(info_t info);
 
 #endif /* MONTY */
