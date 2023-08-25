@@ -1,5 +1,11 @@
 #include "monty.h"
 
+/**
+ * mul - multiplies the second top element of the
+ * stack with the top element of the stack.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void mul(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -18,6 +24,13 @@ void mul(stack_t **stack, unsigned int line_number)
 	free(temp);
 }
 
+
+/**
+ * mod - computes the rest of the division of the second
+ * top element of the stack by the top element of the stack.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void mod(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -34,7 +47,7 @@ void mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	remain = (*stack)->next->n % (*stack)->n;
+	remain = (*stack)->n % (*stack)->next->n;
 	temp = *stack;
 	(*stack)->n = remain;
 	free(temp);

@@ -76,5 +76,10 @@ void free_list(stack_t *h);
 stack_t *add_node_end(stack_t **h, int n);
 stack_t *add_node(stack_t **h, int n);
 void free_info(info_t info);
+void num_arg_check(int ac);
+FILE *file_check(char **av);
+void (*get_operation(char *operation_code))(stack_t **stack, unsigned int line_number);
+void invalid_function(int line_num, char *opcode);
+void tokenize_exec(info_t *info);
 
 #endif /* MONTY */

@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * swap - swaps the top two elements of the stack.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *element1, *element2;
@@ -23,6 +28,11 @@ void swap(stack_t **stack, unsigned int line_number)
 	*stack = element2;
 }
 
+/**
+ * add -  adds the top two elements of the stack.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void add(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -40,12 +50,23 @@ void add(stack_t **stack, unsigned int line_number)
 	free(temp);
 }
 
+/**
+ * nop - doesn’t do anything.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
 }
 
+/**
+ * sub - subtracts the top element of the stack from the
+ * second top element of the stack.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void sub(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
@@ -64,6 +85,12 @@ void sub(stack_t **stack, unsigned int line_number)
 	free(temp);
 }
 
+/**
+ * division - divides the second top element of the stack by
+ * the top element of the stack.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void division(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;

@@ -74,7 +74,6 @@ void free_list(stack_t *h)
 		h = h->next;
 		free(node);
 	}
-	
 }
 
 void free_info(info_t info)

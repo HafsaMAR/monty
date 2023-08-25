@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * is_digit - function that convert string to number
+ * @argument: string to convert
+ * Return: number
+*/
 int is_digit(char *argument)
 {
 	if (*argument == '-' || *argument == '+')
@@ -56,6 +61,12 @@ void pall(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * pint -  prints the value at the top of the stack
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
+
 void pint(stack_t **stack, unsigned int line_number)
 {
 
@@ -67,6 +78,11 @@ void pint(stack_t **stack, unsigned int line_number)
 	printf("%d\n", (*stack)->n);
 }
 
+/**
+ * pop - removes the top element of the stack.
+ * @stack: pointer to header of stack structure
+ * @line_number: number line of the operation
+*/
 void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;

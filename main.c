@@ -2,67 +2,6 @@
 
 info_t info = {0};
 
-void num_arg_check(int ac)
-{
-	/* check the number of arguments passed*/
-	if (ac != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-}
-
-FILE *file_check(char **av)
-{
-	FILE *input_file = fopen(av[1], "r");
-	if (!input_file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
-		exit(EXIT_FAILURE);
-	}
-	return (input_file);
-}
-
-/*{"push", &push}, {"pall", &pall}, ,  , , , {"sub", sub}, {"div", &division}, {"mul", &mul}, {"rotl", &rotl}, {"rotr", &rotr}, {"stack", &stack}, {"queue", &queue}, {"pstr", &pstr}, {"pchar", &pchar}, {"mod", &mod}, {NULL, NULL}};*/
-void (*get_operation(char *operation_code))(stack_t **stack, unsigned int line_number)
-{
-	int i;
-	instruction_t operations[] = {
-		{"push", &push}, {"pall", &pall}, {"pint", &pint}, {"pop", &pop}, {"swap", &swap}, {"nop", &nop}, {"add", &add}, {"sub", sub}, {"div", &division}, {"mul", &mul}, {"mod", &mod}, {"stack", &stack}, {"queue", &queue}, {NULL, NULL}};
-	for (i = 0; operations[i].opcode != NULL; i++)
-	{
-		if (strcmp(operation_code, operations[i].opcode) == 0)
-		{
-			return (operations[i].f);
-		}
-	}
-	return (NULL);
-}
-void invalid_function(int line_num, char *opcode)
-{
-	fprintf(stderr, "L%d: unknown instruction %s\n",
-			line_num, opcode);
-	exit(EXIT_FAILURE);
-}
-
-void tokenize_exec(info_t *info)
-{
-	char *opcode;
-	void (*function)(stack_t **stack, unsigned int line_number);
-
-	/* intialization of the structure*/
-	opcode = strtok(info->line, " \t\n");
-	if (!opcode || opcode[0] == '#')
-		return;
-	function = get_operation(opcode);
-	if (function != NULL)
-	{
-		function(&info->stack, info->line_num);
-	}
-	else
-		invalid_function(info->line_num, opcode);
-}
-
 /**
  * main - entry point
  * @ac: number of argument
