@@ -47,8 +47,8 @@ void mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	remain = (*stack)->n % (*stack)->next->n;
+	remain = (*stack)->next->n % (*stack)->n;
 	temp = *stack;
-	(*stack)->n = remain;
+	(*stack)->next->n = remain;
 	free(temp);
 }
