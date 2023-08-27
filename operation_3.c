@@ -49,6 +49,7 @@ void mod(stack_t **stack, unsigned int line_number)
 
 	remain = (*stack)->next->n % (*stack)->n;
 	temp = *stack;
-	(*stack)->next->n = remain;
+	*stack = (*stack)->next;
+	(*stack)->n = remain;
 	free(temp);
 }
