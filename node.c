@@ -83,3 +83,26 @@ void free_info(info_t info)
 		free_list(info.stack);
 	}
 }
+
+/**
+ * rotr - Rotates the stack to the right
+ * @stack: pointer to the head of the stack
+ * @line_number: line number of the command being run (unused)
+ */
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp, *last;
+
+	(void)line_number;
+	if (*stack == NULL || (*stack)->next == NULL)
+		return;
+	temp = *stack;
+	last = *stack;
+	while (last->next != NULL)
+		last = last->next;
+	last->prev->next = NULL;
+	last->prev = NULL;
+	temp->prev = last;
+	last->next = temp;
+	*stack = last;
+}

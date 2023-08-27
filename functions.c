@@ -45,7 +45,8 @@ void (*get_operation(char *operation_code))(stack_t **stack, unsigned int line_n
 		{"push", &push}, {"pall", &pall}, {"pint", &pint}, {"pop", &pop},
 		{"swap", &swap}, {"nop", &nop}, {"add", &add}, {"sub", sub},
 		{"div", &division}, {"mul", &mul}, {"mod", &mod}, {"stack", &stack},
-		{"queue", &queue}, {NULL, NULL}};
+		{"queue", &queue}, {"rotl", rotl}, {"rotr", rotr}, {"pchar", pchar},
+		{"pstr", pstr}, {NULL, NULL}};
 	for (i = 0; operations[i].opcode != NULL; i++)
 	{
 		if (strcmp(operation_code, operations[i].opcode) == 0)
